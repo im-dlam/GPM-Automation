@@ -3,13 +3,14 @@ import queue
 import time , random
 
 def worker(task_queue, thread_id):
+    tk = task_queue
     while True:
         try:
-            data = task_queue.get(timeout=1)  # Lấy dữ liệu từ hàng đợi
+            data = tk.get(timeout=1)  # Lấy dữ liệu từ hàng đợi
             print(f"Thread-{thread_id} đang xử lý dữ liệu: {data}")
             time.sleep(random.randint(5,30))  # Giả lập thời gian xử lý
             print(f"Thread-{thread_id} đã hoàn thành dữ liệu: {data}")
-            task_queue.task_done()
+            tk.task_done()
         except queue.Empty:
             break
 
